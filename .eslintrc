@@ -1,0 +1,7 @@
+{
+  "extends": "@antfu",
+  "rules": {
+    "no-console": "off",
+    "eslint-comments/no-unlimited-disable": "off"
+  }
+}

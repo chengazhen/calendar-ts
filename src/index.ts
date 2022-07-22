@@ -1,6 +1,6 @@
 type Week = Array<string | Date | number>
 
-export class Calendar {
+export default class Calendar {
   firstWeekDay: number
 
   constructor(firstWeekDay = 0) {
@@ -9,7 +9,7 @@ export class Calendar {
 
   weekStartDate(date: Date): Date {
     const starDate: Date = new Date(date.getTime())
-    while (starDate.getDate() !== this.firstWeekDay)
+    while (starDate.getDay() !== this.firstWeekDay)
       starDate.setDate(starDate.getDate() - 1)
 
     return starDate
@@ -45,6 +45,23 @@ export class Calendar {
     } while ((date.getMonth() <= month) && (date.getFullYear() === year))
 
     return weeks
+  }
+
+  monthDays(year: number, month: number) {
+    const getDayOrZero = (date: Date) => {
+      return date.getMonth() === month ? date.getDate() : 0
+    }
+    return this.monthDates(year, month, getDayOrZero)
+  }
+
+  monthText(year: number, month: number) {
+    const getDayOrBlank = (date: Date) => {
+      let s = date.getMonth() === month ? date.getDate().toString() : '  '
+      while (s.length < 2) s = ` ${s}`
+      return s
+    }
+    const weeks = this.monthDates(year, month, getDayOrBlank)
+    return weeks.join('\n')
   }
 }
 

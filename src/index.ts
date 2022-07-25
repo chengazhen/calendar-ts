@@ -21,7 +21,7 @@ export default class Calendar {
    * @param {number} month
    * @param {function} dayFormatter
    */
-  monthDates(year: number, month: number, dayFormatter: (d: Date) => string | Date | number): Array<Week> {
+  monthDates(year: number, month: number, dayFormatter?: (d: Date) => string | Date | number): Array<Week> {
     if (year < 1970)
       console.warn('year must be a number >= 1970')
 

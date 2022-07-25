@@ -1,5 +1,3 @@
-type Week = Array<string | Date | number>
-
 export default class Calendar {
   firstWeekDay: number
 
@@ -19,24 +17,23 @@ export default class Calendar {
    * @description: 生成日历数组
    * @param {number} year
    * @param {number} month
-   * @param {function} dayFormatter
    */
-  monthDates(year: number, month: number, dayFormatter?: (d: Date) => string | Date | number): Array<Week> {
+  monthDates(year: number, month: number) {
     if (year < 1970)
       console.warn('year must be a number >= 1970')
 
     if ((month < 0) || (month > 11))
       console.error('month must be a number (Jan is 0)')
 
-    let week: Week = []
+    let week: Date[] = []
 
-    const weeks: Array<Week> = []
+    const weeks: Array<Date[]> = []
 
     let date = this.weekStartDate(new Date(year, month, 1))
 
     do {
       for (let i = 0; i < 7; i++) {
-        week.push(dayFormatter ? dayFormatter(date) : date)
+        week.push(date)
         date = new Date(date.getTime())
         date.setDate(date.getDate() + 1)
       }
@@ -48,10 +45,7 @@ export default class Calendar {
   }
 
   monthDays(year: number, month: number) {
-    const getDayOrZero = (date: Date) => {
-      return date.getMonth() === month ? date.getDate() : 0
-    }
-    return this.monthDates(year, month, getDayOrZero)
+    return this.monthDates(year, month).map(row => row.map(col => col.getMonth() === month ? col.getDate() : 0))
   }
 
   monthText(year: number, month: number) {
@@ -60,7 +54,7 @@ export default class Calendar {
       while (s.length < 2) s = ` ${s}`
       return s
     }
-    const weeks = this.monthDates(year, month, getDayOrBlank)
+    const weeks = this.monthDates(year, month).map(row => row.map(col => getDayOrBlank(col)))
     return weeks.join('\n')
   }
 }

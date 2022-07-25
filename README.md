@@ -63,6 +63,6 @@ c.monthDates(2022, 7) // 返回一个当月数据的二维数组
 
 |  api   |explore  | argument  |
 |  ----  | ----  | ----  |
-| monthDates  | 获取当月日历数据 | （year, month, function(可选) ）|
+| monthDates  | 获取当月日历数据 | （year, month ）|
 | monthDays  | 获取当月日历数据，值为格式化后的 number | （year, month）|
 | monthText  | 获取当月日历数据，值为字符串，此 api 意义不大 | （year, month）|

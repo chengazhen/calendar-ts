@@ -2,6 +2,10 @@
   "extends": "@antfu",
   "rules": {
     "no-console": "off",
-    "eslint-comments/no-unlimited-disable": "off"
+    "eslint-comments/no-unlimited-disable": "off",
+    "curly": [
+      "error",
+      "all"
+    ]
   }
 }

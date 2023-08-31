@@ -1,4 +1,4 @@
-export default class Calendar {
+class Calendar {
   firstWeekDay: number
 
   constructor(firstWeekDay = 0) {
@@ -7,8 +7,7 @@ export default class Calendar {
 
   weekStartDate(date: Date): Date {
     const starDate: Date = new Date(date.getTime())
-    while (starDate.getDay() !== this.firstWeekDay)
-      starDate.setDate(starDate.getDate() - 1)
+    while (starDate.getDay() !== this.firstWeekDay) { starDate.setDate(starDate.getDate() - 1) }
 
     return starDate
   }
@@ -19,11 +18,9 @@ export default class Calendar {
    * @param {number} month
    */
   monthDates(year: number, month: number) {
-    if (year < 1970)
-      console.warn('year must be a number >= 1970')
+    if (year < 1970) { console.warn('year must be a number >= 1970') }
 
-    if ((month < 0) || (month > 11))
-      console.error('month must be a number (Jan is 0)')
+    if ((month < 0) || (month > 11)) { console.error('month must be a number (Jan is 0)') }
 
     let week: Date[] = []
 
@@ -51,7 +48,7 @@ export default class Calendar {
   monthText(year: number, month: number) {
     const getDayOrBlank = (date: Date) => {
       let s = date.getMonth() === month ? date.getDate().toString() : '  '
-      while (s.length < 2) s = ` ${s}`
+      while (s.length < 2) { s = ` ${s}` }
       return s
     }
     const weeks = this.monthDates(year, month).map(row => row.map(col => getDayOrBlank(col)))
@@ -59,3 +56,4 @@ export default class Calendar {
   }
 }
 
+export default Calendar
